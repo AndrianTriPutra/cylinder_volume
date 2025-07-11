@@ -1,7 +1,8 @@
 # cylinder_volume
 
 ## getting started
-- go run . length radius depth
+- go run . length diameter depth
 
 ## reference
-- https://www.mathopenref.com/cylindervolpartial.html
+- [mathopenref](https://www.mathopenref.com/cylindervolpartial.html)
+

@@ -13,7 +13,7 @@ import (
 func main() {
 	flag.Usage = func() {
 		fmt.Println("Usage:")
-		fmt.Println("      go run . length radius depth")
+		fmt.Println("      go run . length diameter depth")
 		flag.PrintDefaults()
 	}
 
@@ -25,22 +25,29 @@ func main() {
 
 	length, err := strconv.ParseFloat(flag.Args()[0], 64)
 	if err != nil {
-		log.Fatalf("error convert length cause:%s", err.Error())
+		log.Fatalf("error convert length:%v", err)
 	}
 
-	radius, err := strconv.ParseFloat(flag.Args()[1], 64)
+	diameter, err := strconv.ParseFloat(flag.Args()[1], 64)
 	if err != nil {
-		log.Fatalf("error convert radius cause: %s", err.Error())
+		log.Fatalf("error convert diameter:%v", err)
 	}
 
 	depth, err := strconv.ParseFloat(flag.Args()[2], 64)
 	if err != nil {
-		log.Fatalf("error convert depth cause: %s", err.Error())
+		log.Fatalf("error convert depth:%v", err)
 	}
 
-	fmt.Printf("length: %.2f\n", length)
-	fmt.Printf("radius: %.2f\n", radius)
-	fmt.Printf("depth : %.2f\n", depth)
-	volume := volume.Cylinder(length, radius, depth)
-	fmt.Printf("volume: %.2f\n", volume)
+	radius := diameter / 2
+	log.Printf("length  : %.4f", length)
+	log.Printf("diameter: %.4f", diameter)
+	log.Printf("radius  : %.4f", radius)
+	log.Printf("depth   : %.4f", depth)
+
+	volume, err := volume.Cylinder(length, radius, depth)
+	if err != nil {
+		log.Fatalf("Failed Calculate Volume:%v", err)
+	}
+	log.Printf("Volume  : %.4f (m3)", volume)
+
 }
